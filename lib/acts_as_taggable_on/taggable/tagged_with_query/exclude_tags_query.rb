@@ -20,7 +20,7 @@ module ActsAsTaggableOn
               .join(tag_arel_table)
               .on(
                 tagging_arel_table[:tag_id].eq(tag_arel_table[:id])
-                .and(tagging_arel_table[:taggable_type].eq(taggable_model.base_class.name))
+                .and(tagging_arel_table[:taggable_type].eq(taggable_model_type))
                 .and(tags_match_type)
               )
           )
@@ -39,7 +39,7 @@ module ActsAsTaggableOn
                         tagging_arel_table[:tagger_id].eq(owner.id)
                         .and(tagging_arel_table[:tagger_type].eq(owner.class.base_class.to_s))
                         .and(tagging_arel_table[:taggable_id].eq(taggable_arel_table[taggable_model.primary_key]))
-                        .and(tagging_arel_table[:taggable_type].eq(taggable_model.base_class.name))
+                        .and(tagging_arel_table[:taggable_type].eq(taggable_model_type))
                       )
 
           if options[:match_all].present?
@@ -55,7 +55,7 @@ module ActsAsTaggableOn
 
         def match_all_on_conditions
           on_condition = tagging_arel_table[:taggable_id].eq(taggable_arel_table[taggable_model.primary_key])
-                                                         .and(tagging_arel_table[:taggable_type].eq(taggable_model.base_class.name))
+                                                         .and(tagging_arel_table[:taggable_type].eq(taggable_model_type))
 
           if options[:start_at].present?
             on_condition = on_condition.and(tagging_arel_table[:created_at].gteq(options[:start_at]))
