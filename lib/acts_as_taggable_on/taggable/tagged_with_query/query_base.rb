@@ -10,11 +10,12 @@ module ActsAsTaggableOn
           @tagging_model  = tagging_model
           @tag_list       = tag_list
           @options        = options
+          @taggable_model_type = options.fetch(:taggable_model_type) { taggable_model.base_class.name }
         end
 
         private
 
-        attr_reader :taggable_model, :tag_model, :tagging_model, :tag_list, :options
+        attr_reader :taggable_model, :tag_model, :tagging_model, :tag_list, :options, :taggable_model_type
 
         def taggable_arel_table
           @taggable_arel_table ||= taggable_model.arel_table
