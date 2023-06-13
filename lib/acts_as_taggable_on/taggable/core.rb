@@ -112,6 +112,8 @@ module ActsAsTaggableOn
 
           return none if tag_list.empty?
 
+          Rails.logger.info "TARDIS"
+          Rails.logger.info ActsAsTaggableOn::Tagging
           ::ActsAsTaggableOn::Taggable::TaggedWithQuery.build(self, ActsAsTaggableOn::Tag, ActsAsTaggableOn::Tagging,
                                                               tag_list, options)
         end
