@@ -10,6 +10,8 @@ module ActsAsTaggableOn
           @tagging_model  = tagging_model
           @tag_list       = tag_list
           @options        = options
+          Rails.logger.info options.inspect
+          Rails.logger.info taggable_model.base_class.name
           @taggable_model_type = options.fetch(:taggable_model_type) { taggable_model.base_class.name }
         end
 
